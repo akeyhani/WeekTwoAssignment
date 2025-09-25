@@ -1,3 +1,5 @@
+/*
+
 package com.example.weektwoassignment
 
 import android.os.Bundle
@@ -42,3 +44,5 @@ class SecondFragment : Fragment() {
         _binding = null
     }
 }
+
+ */

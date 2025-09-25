@@ -1,4 +1,6 @@
+/*
 package com.example.weektwoassignment
+
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -41,4 +43,5 @@ class FirstFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-}
+
+ */
