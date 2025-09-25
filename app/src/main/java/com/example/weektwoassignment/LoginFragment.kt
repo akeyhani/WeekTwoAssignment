@@ -9,7 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.weektwoassignment.databinding.FragmentLoginBinding
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
@@ -26,6 +27,12 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.loginButton.setOnClickListener {
+            binding.usernameLayout.error = null
+            binding.passwordLayout.error = null
+            val work = OneTimeWorkRequestBuilder<ReminderWorker>().build()
+            WorkManager.getInstance(requireContext()).enqueue(work)
+            
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             val u = binding.usernameInput.text?.toString().orEmpty()
             val p = binding.passwordInput.text?.toString().orEmpty()
             if (u.isBlank() || p.isBlank()) {
