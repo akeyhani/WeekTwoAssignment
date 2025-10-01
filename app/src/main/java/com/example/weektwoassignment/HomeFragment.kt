@@ -10,8 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.example.weektwoassignment.databinding.FragmentHomeBinding
 import com.google.android.material.snackbar.Snackbar
-
+import androidx.fragment.app.activityViewModels
 class HomeFragment : Fragment() {
+    private val appViewModel: AppViewModel by activityViewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
@@ -23,6 +24,16 @@ class HomeFragment : Fragment() {
         binding.logoutButton.setOnClickListener {
             LogoutDialogFragment().show(parentFragmentManager, "logout_dialog")
         }
+        // observ username from ViewModel and update ui
+
+        appViewModel.username.observe(viewLifecycleOwner) { name ->
+            binding.welcome.text = if (name.isNullOrBlank()) {
+                "Welcome Home"
+            } else {
+                "Welcome, $name"
+            }
+        }
+
         val nav = findNavController()
         val loginEntry = nav.getBackStackEntry(R.id.loginFragment)
 
